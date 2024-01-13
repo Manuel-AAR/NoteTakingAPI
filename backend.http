@@ -1,0 +1,162 @@
+@backend_HostAddress = http://localhost:5167
+
+### USER TESTS
+POST {{backend_HostAddress}}/User/CreateUser
+Accept: */*
+Content-Type: application/json
+
+{
+  "UserName": "TestUser",
+  "Password": "TestPassword",
+  "PasswordCheck": "TestPassword"
+}
+
+###
+
+POST {{backend_HostAddress}}/User/LogIn
+Accept: */*
+Content-Type: application/json
+
+{
+  "UserName": "TestUser",
+  "Password": "TestPassword"
+}
+
+### NOTE TESTS
+
+GET {{backend_HostAddress}}/Note/GetNotes
+UserId: 1
+Accept: application/json
+
+###
+
+GET {{backend_HostAddress}}/Note/GetArchivedNotes
+UserId: 1
+Accept: application/json
+
+###
+
+GET {{backend_HostAddress}}/Note/GetNote?NoteId=1
+UserId: 1
+Accept: application/json
+
+###
+
+POST {{backend_HostAddress}}/Note/SearchNotes
+UserId: 1
+Accept: */*
+Content-Type: application/json
+
+{
+  "TagIDs": [1]
+}
+
+###
+
+POST {{backend_HostAddress}}/Note/SearchNotesArchived
+UserId: 1
+Accept: */*
+Content-Type: application/json
+
+{
+  "TagIDs": [1]
+}
+
+###
+
+POST {{backend_HostAddress}}/Note/CreateNote
+UserId: 1
+Accept: */*
+Content-Type: application/json
+
+{
+  "NoteName": "My First Note",
+  "NoteContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at velit at augue euismod faucibus eu eget dolor. Pellentesque suscipit euismod risus a accumsan. Cras nec eleifend ante. Vestibulum eu elit tortor. Mauris a sapien gravida, suscipit nisi a, consequat ante. Pellentesque ligula ligula, viverra vel lacus tristique, pretium porttitor sem. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam pellentesque ante ac tellus vulPOSTate, congue eleifend lectus ullamcorper. Morbi fringilla diam est, quis ultrices augue blandit ac. Nam consequat mauris ligula, et pretium dolor tincidunt et. Nam auctor molestie interdum. Cras id laoreet urna. Phasellus a mauris euismod, dignissim dolor in, tristique lacus. Etiam in convallis odio, eget tristique ipsum."
+}
+
+###
+
+PATCH {{backend_HostAddress}}/Note/UpdateNote
+UserId: 1
+Accept: */*
+Content-Type: application/json
+
+{
+  "NoteId": "1",
+  "NoteName": "My First Note MODIFIED",
+  "NoteContent": "Modified content"
+}
+
+###
+
+PATCH {{backend_HostAddress}}/Note/ArchiveNote
+UserId: 1
+Accept: */*
+Content-Type: application/json
+
+{
+  "Id": "1"
+}
+
+###
+
+DELETE {{backend_HostAddress}}/Note/DeleteNote
+UserId: 1
+Accept: */*
+Content-Type: application/json
+
+{
+  "Id": "1"
+}
+
+### TAG TEST
+
+GET {{backend_HostAddress}}/Tag/GetTags
+UserId: 1
+Accept: application/json
+
+###
+
+POST {{backend_HostAddress}}/Tag/CreateTag
+UserId: 1
+Accept: */*
+Content-Type: application/json
+
+{
+  "TagName": "Tag 1"
+}
+
+###
+
+PATCH {{backend_HostAddress}}/Tag/AddTagToNote
+UserId: 1
+Accept: */*
+Content-Type: application/json
+
+{
+  "NoteId": "1",
+  "TagId": "1"
+}
+
+###
+
+PATCH {{backend_HostAddress}}/Tag/RemoveTagFromNote
+UserId: 1
+Accept: */*
+Content-Type: application/json
+
+{
+  "NoteId": "1",
+  "TagId": "1"
+}
+
+###
+
+DELETE {{backend_HostAddress}}/Tag/DeleteTag
+UserId: 1
+Accept: */*
+Content-Type: application/json
+
+{
+  "Id": "1"
+}
