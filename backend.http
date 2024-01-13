@@ -128,7 +128,7 @@ Content-Type: application/json
 
 ###
 
-PATCH {{backend_HostAddress}}/Tag/AddTagToNote
+PATCH {{backend_HostAddress}}/Tag/TagAndNote
 UserId: 1
 Accept: */*
 Content-Type: application/json

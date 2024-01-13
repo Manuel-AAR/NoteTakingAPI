@@ -35,13 +35,13 @@ public class TagRepository
 
     }
 
-    public void AddTagToNote (NoteTag addTagToNote)
+    public void TagAndNote (NoteTag TagAndNote)
     {
         context = new();
-        NoteTag noteTag = context.NoteTags.FirstOrDefault(NoteTag => NoteTag.NoteId == addTagToNote.NoteId && NoteTag.TagId == addTagToNote.TagId) ?? new();
+        NoteTag noteTag = context.NoteTags.FirstOrDefault(NoteTag => NoteTag.NoteId == TagAndNote.NoteId && NoteTag.TagId == TagAndNote.TagId) ?? new();
         if (noteTag.NoteTagId > 0) throw new Exception("The tag it's already linked to that note");
 
-        context.NoteTags.Add(addTagToNote);
+        context.NoteTags.Add(TagAndNote);
 
         int affectedRows = context.SaveChanges();
 

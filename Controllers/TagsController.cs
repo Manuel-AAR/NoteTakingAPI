@@ -19,6 +19,12 @@ public class TagController : Controller
         tagRepository = new();
     }
 
+    /// <summary>
+    /// This method is used to get tags.
+    /// </summary>
+    /// <returns>
+    /// Returns an IActionResult that contains the tags for a specific user.
+    /// </returns>
     [HttpGet("GetTags")]
     public IActionResult GetTags ()
     {
@@ -31,6 +37,13 @@ public class TagController : Controller
         
     }
 
+    /// <summary>
+    /// Creates a tag.
+    /// </summary>
+    /// <param name="tagName">A DTO for the data of the new tag</param>
+    /// <returns>
+    /// Returns an IActionResult.
+    /// </returns>
     [HttpPost("CreateTag")]
     public IActionResult CreateTag ([FromBody] CreateTag tagName)
     {
@@ -47,34 +60,55 @@ public class TagController : Controller
         return Ok();
     }
 
+    /// <summary>
+    /// Adds a tag to a note
+    /// </summary>
+    /// <param name="TagAndNote">A DTO containing the id of the note and the tag respectively</param>
+    /// <returns>
+    /// Returns an IActionResult.
+    /// </returns>
     [HttpPatch("AddTagToNote")]
-    public IActionResult AddTagToNote ([FromBody] AddTagToNote addTagToNote)
+    public IActionResult AddTagToNote ([FromBody] TagAndNote TagAndNote)
     {
 
         NoteTag noteTag = new()
         {
-            NoteId = addTagToNote.NoteId,
-            TagId = addTagToNote.TagId
+            NoteId = TagAndNote.NoteId,
+            TagId = TagAndNote.TagId
         };
 
-        tagRepository.AddTagToNote(noteTag);
+        tagRepository.TagAndNote(noteTag);
         return Ok();
     }
 
+    /// <summary>
+    /// Removes a tag from a note
+    /// </summary>
+    /// <param name="TagAndNote">A DTO containing the id of the note and the tag respectively</param>
+    /// <returns>
+    /// Returns an IActionResult.
+    /// </returns>
     [HttpPatch("RemoveTagFromNote")]
-    public IActionResult RemoveTagFromNote ([FromBody] AddTagToNote addTagToNote)
+    public IActionResult RemoveTagFromNote ([FromBody] TagAndNote TagAndNote)
     {
 
         NoteTag noteTag = new()
         {
-            NoteId = addTagToNote.NoteId,
-            TagId = addTagToNote.TagId
+            NoteId = TagAndNote.NoteId,
+            TagId = TagAndNote.TagId
         };
 
         tagRepository.RemoveTagFromNote(noteTag);
         return Ok();
     }
 
+    /// <summary>
+    /// Deletes a Tag.
+    /// </summary>
+    /// <param name="TagId">The id of the tag to delete</param>
+    /// <returns>
+    /// Returns an IActionResult.
+    /// </returns>
     [HttpDelete("DeleteTag")]
     public IActionResult DeleteTag ([FromBody] GetById TagId)
     {

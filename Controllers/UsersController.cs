@@ -20,6 +20,13 @@ public class UserController : Controller
         userRepository = new();
     }
 
+    /// <summary>
+    /// Performs a logIn.
+    /// </summary>
+    /// <param name="logIn">A DTO for the login credentials</param>
+    /// <returns>
+    /// Returns an IActionResult containing the user id.
+    /// </returns>
     [HttpPost("LogIn")]
     public IActionResult LogIn ([FromBody] LogIn logIn)
     {
@@ -33,6 +40,13 @@ public class UserController : Controller
         
     }
 
+    /// <summary>
+    /// Creates a new user.
+    /// </summary>
+    /// <param name="createUser">A DTO for the new user credentials</param>
+    /// <returns>
+    /// Returns an IActionResult.
+    /// </returns>
     [HttpPost("CreateUser")]
     public IActionResult CreateUser ([FromBody] CreateUser createUser)
     {
